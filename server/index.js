@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const { MongoClient } = require('mongodb');
@@ -14,6 +15,8 @@ express()
   .use(morgan('dev'))
   .use(express.urlencoded({ extended: false }))
   .use(express.json())
+  .use(express.static(path.join(__dirname, '..', 'build')))
+  .use(express.static('public'))
 
   // hello from server
   .get('/hello', (req, res) => {
