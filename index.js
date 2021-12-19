@@ -3,7 +3,6 @@ const morgan = require('morgan');
 const { MongoClient } = require('mongodb');
 
 require('dotenv').config();
-nv;
 const PORT = process.env.PORT || 4000;
 const { MONGO_URI } = process.env;
 
@@ -22,18 +21,19 @@ express()
   })
 
   // hello from db
-  .get('/greeting', async (req, res) => {
+  .get('/streams', async (req, res) => {
     try {
-      const client = await MongoClient(MONGO_URI, options);
+      const client = await new MongoClient(MONGO_URI, options);
       await client.connect();
 
-      const db = client.db('research-stream');
-      const { greeting } = await db
-        .collection('greetings')
-        .findOne({ type: 'hello' });
+      const db = client.db('words-streams');
+      const streams = await db
+        .collection('streams')
+        .find()
+        .toArray();
 
       client.close();
-      res.status(200).json({ greeting });
+      res.status(200).json({ streams });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'something went wrong ☹️' });
