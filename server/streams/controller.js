@@ -24,7 +24,7 @@ const getStreamById = async (req, res) => {
 const addStream = async (req, res) => {
   const { url } = req.body;
   try {
-    const stream = await Streams.create({ url }).exec();
+    const stream = await Streams.create({ url });
     res.status(200).json({ stream, message: 'steam added' });
   } catch (error) {
     console.error(error);
@@ -34,8 +34,9 @@ const addStream = async (req, res) => {
 
 const deleteStream = async (req, res) => {
   const { id } = req.params;
+  console.log('deleting', id);
   try {
-    await Streams.deleteOne({ id }).exec();
+    await Streams.deleteOne({ _id: id }).exec();
     res.status(200).json({ message: 'stream deleted' });
   } catch (error) {
     console.error(error);
