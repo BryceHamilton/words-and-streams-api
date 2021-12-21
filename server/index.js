@@ -1,7 +1,9 @@
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
+
+const streamRoutes = require('./streams/routes');
 
 require('dotenv').config();
 const PORT = process.env.PORT || 4000;
@@ -11,36 +13,25 @@ const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true
 };
+
+mongoose.connect(MONGO_URI || '', options);
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => console.log('db connected'));
+
 express()
   .use(morgan('dev'))
   .use(express.urlencoded({ extended: false }))
   .use(express.json())
+
   .use(express.static(path.join(__dirname, '..', 'build')))
   .use(express.static('public'))
 
-  // hello from server
-  .get('/hello', (req, res) => {
-    res.status(200).json({ greeting: 'hello from heroku and node 👋' });
-  })
+  .use('/streams', streamRoutes)
 
-  // hello from db
-  .get('/streams', async (req, res) => {
-    try {
-      const client = await new MongoClient(MONGO_URI, options);
-      await client.connect();
-
-      const db = client.db('words-streams');
-      const streams = await db
-        .collection('streams')
-        .find()
-        .toArray();
-
-      client.close();
-      res.status(200).json({ streams });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'something went wrong ☹️' });
-    }
+  .use((req, res, next) => {
+    res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
   })
 
   .listen(PORT, () => {
