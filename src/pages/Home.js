@@ -94,7 +94,7 @@ const Container = styled.div`
     height: 100%;
   }
 
-  @media only screen and (max-width: 768px) {
+  @media (max-width: 768px) {
     flex-direction: column;
     > div,
     > img {
