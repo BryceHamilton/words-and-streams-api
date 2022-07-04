@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon index.js",
     "heroku-postbuild": "cd client && yarn && yarn build",
-    "build": "node index.js"
+    "build": "node index.js",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC"
