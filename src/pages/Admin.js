@@ -7,9 +7,9 @@ const Login = ({ setIsAuthenticated }) => {
   const passwordRef = useRef();
 
   const ADMIN =
-    '5f8b67a0bb370867697dde2aa64e3ac330c59732f2e8cda53c08492727239be6';
+    '5f207a5cb9288ab7b6802da2792f3c09c58e0e30649dc7a2872a23d92981b9af';
 
-  const handleSubmit = ev => {
+  const handleSubmit = (ev) => {
     ev.preventDefault();
     const inputPassword = passwordRef.current.value;
     const hashedPassword = sha256(inputPassword);
@@ -21,8 +21,8 @@ const Login = ({ setIsAuthenticated }) => {
   return (
     <LoginContainer>
       <form onSubmit={handleSubmit}>
-        <input type="password" ref={passwordRef} />
-        <input type="submit" style={{ display: 'none' }} />
+        <input type='password' ref={passwordRef} />
+        <input type='submit' style={{ display: 'none' }} />
       </form>
     </LoginContainer>
   );
@@ -34,7 +34,7 @@ const Stream = ({ stream, deleteStream }) => {
       {/* <Link to={`/stream/${stream._id}`}>{stream.url}</Link> */}
       <a href={stream.url}>{stream.url}</a>
       <button onClick={() => deleteStream(stream._id)}>
-        <i class="fa fa-trash" aria-hidden="true"></i>
+        <i class='fa fa-trash' aria-hidden='true'></i>
       </button>
     </StreamListItem>
   );
@@ -60,7 +60,7 @@ export default function Admin() {
     fetchStreams();
   }, [fetchStreams]);
 
-  const addStream = async ev => {
+  const addStream = async (ev) => {
     ev.preventDefault();
 
     const url = inputRef.current.value;
@@ -68,7 +68,7 @@ export default function Admin() {
 
     try {
       await axios.post('/streams', {
-        url
+        url,
       });
     } catch (error) {
       console.error(error);
@@ -80,7 +80,7 @@ export default function Admin() {
     inputRef.current.value = '';
   };
 
-  const deleteStream = async id => {
+  const deleteStream = async (id) => {
     try {
       await axios.delete(`/streams/${id}`);
     } catch (error) {
@@ -100,7 +100,7 @@ export default function Admin() {
   return (
     <Container>
       <ul>
-        {streams.map(stream => (
+        {streams.map((stream) => (
           <Stream
             key={stream._id}
             stream={stream}
@@ -109,9 +109,9 @@ export default function Admin() {
         ))}
       </ul>
       <CenterForm onSubmit={addStream}>
-        <input type="text" ref={inputRef} />
-        <button type="submit">Add</button>
-        <input type="submit" style={{ display: 'none' }} />
+        <input type='text' ref={inputRef} />
+        <button type='submit'>Add</button>
+        <input type='submit' style={{ display: 'none' }} />
       </CenterForm>
     </Container>
   );
