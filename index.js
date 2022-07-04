@@ -26,12 +26,12 @@ express()
   .use(express.json())
 
   .use(express.static(path.join(__dirname, 'client', 'build')))
-  .use(express.static('public'))
+  // .use(express.static('client', 'public'))
 
   .use('/streams', streamRoutes)
 
   .use((req, res, next) => {
-    res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
   })
 
   .listen(PORT, () => {
