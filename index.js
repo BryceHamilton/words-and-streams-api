@@ -11,7 +11,7 @@ const { MONGO_URI } = process.env;
 
 const options = {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 };
 
 mongoose.connect(MONGO_URI || '', options);
@@ -25,7 +25,7 @@ express()
   .use(express.urlencoded({ extended: false }))
   .use(express.json())
 
-  .use(express.static(path.join(__dirname, '..', 'build')))
+  .use(express.static(path.join(__dirname, 'client', 'build')))
   .use(express.static('public'))
 
   .use('/streams', streamRoutes)
