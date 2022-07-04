@@ -23,8 +23,7 @@
   "scripts": {
     "start": "yarn run build && (cd server && yarn start)",
     "dev": "cd server && yarn dev",
-    "heroku-postbuild": "react-scripts build",
-    "build": "cd server && yarn start",
+    "build": "react-scripts build && (cd server && yarn start)",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
