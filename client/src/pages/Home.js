@@ -36,6 +36,8 @@ export default function Home() {
   const [streams, setStreams] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const [isClicked, setIsClicked] = useState(false);
+
   const changeWordAndStream = useCallback(() => {
     setIsLoaded(false);
     setWord(randomWords());
@@ -58,7 +60,9 @@ export default function Home() {
 
   console.log(streams);
 
-  return 'hello';
+  if (!isClicked) {
+    return <button onClick={() => setIsClicked(true)}>click</button>;
+  }
 
   if (streams.length === 0) return <div />;
 
