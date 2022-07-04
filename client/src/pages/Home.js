@@ -18,7 +18,7 @@ function Stream({ link, isLoaded, setIsLoaded, changeWordAndStream }) {
     <img
       src={link}
       style={imageStyles}
-      alt="stream"
+      alt='stream'
       onLoad={() => {
         setIsLoaded && setIsLoaded(true);
       }}
@@ -39,14 +39,14 @@ export default function Home() {
   const changeWordAndStream = useCallback(() => {
     setIsLoaded(false);
     setWord(randomWords());
-    setStreamIdx(lastIdx => getNextRandomIdx(streams.length, lastIdx));
+    setStreamIdx((lastIdx) => getNextRandomIdx(streams.length, lastIdx));
   }, [streams.length]);
 
   useEffect(() => {
     const fetchStreams = async () => {
       const res = await axios.get('/streams');
       const { streams } = res.data;
-      const urls = streams.map(stream => stream.url);
+      const urls = streams.map((stream) => stream.url);
       setStreams(urls);
     };
     fetchStreams();
@@ -55,6 +55,10 @@ export default function Home() {
       document.removeEventListener('click', changeWordAndStream);
     };
   }, [changeWordAndStream]);
+
+  console.log(streams);
+
+  return 'hello';
 
   if (streams.length === 0) return <div />;
 
