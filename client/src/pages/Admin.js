@@ -32,10 +32,11 @@ const Stream = ({ stream, deleteStream }) => {
   return (
     <StreamListItem>
       {/* <Link to={`/stream/${stream._id}`}>{stream.url}</Link> */}
-      <a href={stream.url}>{stream.url}</a>
-      <button onClick={() => deleteStream(stream._id)}>
+      {/* <a href={stream.url}>{stream.url}</a> */}
+      <a href={stream}>{stream}</a>
+      {/* <button onClick={() => deleteStream(stream._id)}>
         <i class='fa fa-trash' aria-hidden='true'></i>
-      </button>
+      </button> */}
     </StreamListItem>
   );
 };
@@ -102,7 +103,7 @@ export default function Admin() {
       <ul>
         {streams.map((stream) => (
           <Stream
-            key={stream._id}
+            // key={stream._id}
             stream={stream}
             deleteStream={deleteStream}
           />

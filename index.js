@@ -2,8 +2,9 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const rw = require('random-words');
 
-const streamRoutes = require('./streams/routes');
+const streamRoutes = require('./api/streams/routes');
 
 require('dotenv').config();
 const PORT = process.env.PORT || 4000;
@@ -25,13 +26,21 @@ express()
   .use(express.urlencoded({ extended: false }))
   .use(express.json())
 
+  .use(express.static(path.join(__dirname, 'ui')))
   .use(express.static(path.join(__dirname, 'client', 'build')))
-  // .use(express.static('client', 'public'))
+
+  .get('/randomWord', (req, res) => {
+    res.json(rw(100));
+  })
 
   .use('/streams', streamRoutes)
 
-  .use((req, res, next) => {
+  .use('/admin', (req, res) => {
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+  })
+
+  .use('/home', (req, res) => {
+    res.sendFile(path.join(__dirname, 'ui', 'streams.html'));
   })
 
   .listen(PORT, () => {

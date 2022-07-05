@@ -8,9 +8,9 @@ export default function AppRoutes() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/stream/:id" element={<Stream />} />
-        <Route exact path="/admin" element={<Admin />} />
+        {/* <Route exact path="/" element={<Home />} /> */}
+        <Route path='/stream/:id' element={<Stream />} />
+        <Route exact path='/admin' element={<Admin />} />
       </Routes>
     </Router>
   );
