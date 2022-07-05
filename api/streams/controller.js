@@ -1,9 +1,5 @@
 const Streams = require('./model');
 
-const links = [
-  'http://183.76.170.60:8080/cgi-bin/camera?resolution=640&amp;quality=1&amp;Language=0&amp;1563133744#.XSuHLwcpv-c.link',
-];
-
 const getAllStreams = async (req, res) => {
   try {
     const streams = await Streams.find({}).exec();

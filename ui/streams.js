@@ -104,6 +104,13 @@ const initialWords = [
   'go',
 ];
 
+const init = () => {
+  fetchStreams();
+  getRandom();
+  setInterval(getRandom, 20000);
+  changeWordAndStream();
+};
+
 const getRandom = async () => {
   const response = await fetch('/randomWord');
   const words = await response.json();
@@ -113,23 +120,17 @@ const getRandom = async () => {
 const fetchStreams = async () => {
   const res = await fetch('/streams');
   const { streams } = await res.json();
-  streamUrls = streams.map((link) => {
+  streamUrls = streams.map((stream) => {
     const stream = document.createElement('img');
-    stream.src = link;
+    stream.src = stream.url;
     stream.id = 'stream';
     stream.onerror = function () {
       console.log('failed');
-      // changeWordAndStream();
+      changeWordAndStream();
     };
     return stream;
   });
-  changeWordAndStream();
-  // .map((stream) => stream.url);
 };
-
-fetchStreams();
-getRandom();
-setInterval(getRandom, 20000);
 
 let lastStreamIndex;
 let lastWordIndex;
