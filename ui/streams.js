@@ -119,7 +119,7 @@ const fetchStreams = async () => {
     stream.id = 'stream';
     stream.onerror = function () {
       console.log('failed');
-      changeWordAndStream();
+      // changeWordAndStream();
     };
     return stream;
   });
