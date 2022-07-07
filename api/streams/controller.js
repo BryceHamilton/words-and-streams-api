@@ -3,7 +3,7 @@ const Streams = require('./model');
 const getAllStreams = async (req, res) => {
   try {
     const streams = await Streams.find({}).exec();
-    res.status(200).json({ streams: links });
+    res.status(200).json({ streams });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'something went wrong ☹️' });
