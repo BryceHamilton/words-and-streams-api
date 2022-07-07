@@ -51,6 +51,7 @@ export default function Admin() {
     try {
       const res = await axios.get('/streams');
       const { streams } = res.data;
+      console.log('fetched streams', streams);
       setStreams(streams);
     } catch (error) {
       console.error(error);
@@ -96,15 +97,13 @@ export default function Admin() {
     return <Login setIsAuthenticated={setIsAuthenticated} />;
   }
 
-  if (!streams) return <div />;
-
   return (
     <Container>
       <ul>
         {streams.map((stream) => (
           <Stream
-            // key={stream._id}
-            stream={stream}
+            key={stream._id}
+            stream={stream.url}
             deleteStream={deleteStream}
           />
         ))}
