@@ -120,9 +120,9 @@ const getRandom = async () => {
 const fetchStreams = async () => {
   const res = await fetch('/streams');
   const { streams } = await res.json();
-  streamUrls = streams.map((stream) => {
+  streamUrls = streams.map(({ url }) => {
     const stream = document.createElement('img');
-    stream.src = stream.url;
+    stream.src = url;
     stream.id = 'stream';
     stream.onerror = function () {
       console.log('failed');
