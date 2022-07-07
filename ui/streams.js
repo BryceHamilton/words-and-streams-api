@@ -104,9 +104,9 @@ const initialWords = [
   'go',
 ];
 
-const init = () => {
-  fetchStreams();
-  getRandom();
+const init = async () => {
+  await fetchStreams();
+  await getRandom();
   setInterval(getRandom, 20000);
   changeWordAndStream();
 };
