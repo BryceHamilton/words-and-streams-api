@@ -162,3 +162,5 @@ const changeWordAndStream = () => {
 };
 
 document.addEventListener('click', changeWordAndStream);
+
+init();
