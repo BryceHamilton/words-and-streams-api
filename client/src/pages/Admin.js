@@ -33,10 +33,10 @@ const Stream = ({ stream, deleteStream }) => {
     <StreamListItem>
       {/* <Link to={`/stream/${stream._id}`}>{stream.url}</Link> */}
       {/* <a href={stream.url}>{stream.url}</a> */}
-      <a href={stream}>{stream}</a>
-      {/* <button onClick={() => deleteStream(stream._id)}>
+      <a href={stream.url}>{stream.url}</a>
+      <button onClick={() => deleteStream(stream._id)}>
         <i class='fa fa-trash' aria-hidden='true'></i>
-      </button> */}
+      </button>
     </StreamListItem>
   );
 };
@@ -52,6 +52,7 @@ export default function Admin() {
       const res = await axios.get('/streams');
       const { streams } = res.data;
       console.log('fetched streams', streams);
+
       setStreams(streams);
     } catch (error) {
       console.error(error);
@@ -103,7 +104,7 @@ export default function Admin() {
         {streams.map((stream) => (
           <Stream
             key={stream._id}
-            stream={stream.url}
+            stream={stream}
             deleteStream={deleteStream}
           />
         ))}
